@@ -1,0 +1,30 @@
+.loginFormContainer {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    width: 40%;
+}
+
+.logo {
+    width: 400px;
+    height: 250px;
+    background-image: url('../../assets/GreenMile-logo.png');
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+
+.loginButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 12px;
+}
+
+.loginButton {
+    width: 30%;
+}
+
+@media (max-width: 500px) {
+    .loginFormContainer {
+        width: 90%;
+    }
+}
