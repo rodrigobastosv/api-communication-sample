@@ -91,9 +91,8 @@ export class Login extends Component {
                         vertical: 'bottom',
                         horizontal: 'center'
                     }}
-                    message='Username or Password invalid!'
+                    message='Either username or password are invalid!'
                     open={this.state.loginFailled}
-                    handleClose={() => { }}
                     autoHideDuration={100}>
                 </Snackbar>
             </div>
