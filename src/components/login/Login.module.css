@@ -20,7 +20,14 @@
 }
 
 .loginButton {
+    display: flex;
+    justify-content: space-between;
     width: 30%;
+    height: 60px;
+}
+
+.progress {
+    color: 'white';
 }
 
 @media (max-width: 500px) {

@@ -5,19 +5,24 @@ import { withRouter } from 'react-router'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
 
 import classes from './Login.module.css';
 import { HOST, LOGIN_ENDPOINT } from '../../constants';
 
 export class Login extends Component {
 
-    state = {
+    initialState = {
         company: '',
         username: '',
         password: '',
         loginFailled: false,
-        formValid: false
+        formValid: false,
+        isLoading: false
     };
+
+    state = {...this.initialState};
 
     companyChangeHandler = (event) => this.setState({ company: event.target.value, formValid: this.getFormValidity() });
     usernameChangeHandler = (event) => this.setState({ username: event.target.value, formValid: this.getFormValidity() });
@@ -28,20 +33,22 @@ export class Login extends Component {
     }
  
     submitFormHandler = () => {
-        let { history } = this.props;
-        history.push('/organization', {a: 1});
+        //let { history } = this.props;
+        //history.push('/organization', {a: 1});
 
+        this.setState({ isLoading: true });
         axios.post(HOST + LOGIN_ENDPOINT, {
-            username: encodeURI('gmtmproot'),
-            password: encodeURI('128h1892h89dh1')
-        }, {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                }
+                username: encodeURI('gmtmproot'),
+                password: encodeURI('128h1892h89dh1')
+            }, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                    }
             }).then(function (response) {
-                this.setState({ loginFailled: false })
+                this.setState({ ...this.initialState })
             }).catch(error => {
-                this.setState({ loginFailled: true })
+                this.setState({ ...this.initialState, loginFailled: true })
             });
     }
 
@@ -78,12 +85,15 @@ export class Login extends Component {
                 />
 
                 <div className={classes.loginButtonContainer}>
-                    <Button 
+                    <Button
                         onClick={this.submitFormHandler}
                         disabled={!this.state.formValid}
                         className={classes.loginButton}
                         variant="contained"
-                        color="primary">Login</Button>
+                        color="primary">
+
+                        {this.state.isLoading ? <CircularProgress color="secondary" size={22} /> :  <Typography>Login</Typography>}
+                    </Button>
                 </div>
 
                 <Snackbar
