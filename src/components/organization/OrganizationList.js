@@ -1,18 +1,13 @@
 import React, { PureComponent, Fragment } from "react";
 import axios from 'axios';
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Typography from '@material-ui/core/Typography';
+
 import LinearProgress from '@material-ui/core/LinearProgress';
-import ExitToAppRounded from '@material-ui/icons/ExitToAppRounded';
 
 import { OrganizationCard } from './organizationCard/OrganizationCard';
 import { ORGANIZATIONS_ENDPOINT } from "../../constants";
 
-import classes from './OrganizationList.module.css';
+import GMOrganizationsBar from '../gm-organizations-bar/GMOrganizationsBar';
 
 export class OrganizationList extends PureComponent {
 
@@ -43,20 +38,7 @@ export class OrganizationList extends PureComponent {
     render() {
         return (
             <Fragment>
-                <AppBar position="static">
-                    <Toolbar className={classes.toolbar}>
-                        <IconButton edge="start" color="inherit" aria-label="Menu">
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography variant="h5" component="h2">
-                            Organizations
-                        </Typography>
-
-                        <IconButton onClick={() => this.props.history.goBack()} aria-label="Delete">
-                            <ExitToAppRounded />
-                        </IconButton>
-                    </Toolbar>
-                </AppBar>
+                <GMOrganizationsBar history={this.props.history}/>
                 {this.state.isLoading ? <LinearProgress color="secondary" /> : null}
 
                 {this.state.organizations.map(o => <OrganizationCard organization={o} key={o.id}/>)}
