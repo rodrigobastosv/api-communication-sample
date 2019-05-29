@@ -24,6 +24,12 @@ export class Login extends Component {
 
     state = { ...this.initialState };
 
+    componentWillMount() {
+        this.setState({
+            ...this.initialState
+        });
+    }
+
     serverChangeHandler = (event) => {
         this.setState({
             server: event.target.value,
