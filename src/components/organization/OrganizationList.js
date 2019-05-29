@@ -19,9 +19,9 @@ export class OrganizationList extends PureComponent {
     }
 
     componentDidMount() {
-        const {username, password} = this.props.location.state;
+        const {server, username, password} = this.props.location.state;
         this.setState({ isLoading: true});
-        axios.get('https://beta.greenmile.com' + '/' + ORGANIZATIONS_ENDPOINT, {
+        axios.get(`${server}/${ORGANIZATIONS_ENDPOINT}`, {
             auth: {
                 username: username,
                 password: password
