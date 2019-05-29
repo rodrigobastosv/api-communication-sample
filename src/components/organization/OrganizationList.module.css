@@ -1,3 +1,7 @@
+.contentContainer {
+    margin-top: 64px;
+}
+
 @media (min-width: 600px) {
     .organizationsContainer {
         display: flex;

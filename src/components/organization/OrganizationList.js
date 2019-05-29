@@ -40,10 +40,13 @@ export class OrganizationList extends PureComponent {
         return (
             <Fragment>
                 <GMOrganizationsBar history={this.props.history}/>
-                {this.state.isLoading ? <LinearProgress color="secondary" /> : null}
 
-                <div className={classes.organizationsContainer}>
-                    {this.state.organizations.map(o => <OrganizationCard organization={o} key={o.id}/>)}
+                <div className={classes.contentContainer}>
+                    {this.state.isLoading ? <LinearProgress color="secondary" /> : null}
+
+                    <div className={classes.organizationsContainer}>
+                        {this.state.organizations.map(o => <OrganizationCard organization={o} key={o.id} />)}
+                    </div>
                 </div>
             </Fragment>);
     }
