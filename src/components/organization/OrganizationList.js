@@ -8,6 +8,7 @@ import { OrganizationCard } from './organizationCard/OrganizationCard';
 import { ORGANIZATIONS_ENDPOINT } from "../../constants";
 
 import GMOrganizationsBar from '../gm-organizations-bar/GMOrganizationsBar';
+import classes from "./OrganizationList.module.css";
 
 export class OrganizationList extends PureComponent {
 
@@ -41,7 +42,9 @@ export class OrganizationList extends PureComponent {
                 <GMOrganizationsBar history={this.props.history}/>
                 {this.state.isLoading ? <LinearProgress color="secondary" /> : null}
 
-                {this.state.organizations.map(o => <OrganizationCard organization={o} key={o.id}/>)}
+                <div className={classes.organizationsContainer}>
+                    {this.state.organizations.map(o => <OrganizationCard organization={o} key={o.id}/>)}
+                </div>
             </Fragment>);
     }
 }
