@@ -14,7 +14,7 @@ export class GMOrganizationsBar extends PureComponent {
     render() {
         return (
             <Fragment>
-                <AppBar position="static">
+                <AppBar position="fixed">
                     <Toolbar className={classes.toolbar}>
                         <IconButton edge="start" color="inherit" aria-label="Menu">
                             <MenuIcon />
