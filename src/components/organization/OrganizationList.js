@@ -7,9 +7,12 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import ExitToAppRounded from '@material-ui/icons/ExitToAppRounded';
 
 import { OrganizationCard } from './organizationCard/OrganizationCard';
 import { ORGANIZATIONS_ENDPOINT } from "../../constants";
+
+import classes from './OrganizationList.module.css';
 
 export class OrganizationList extends PureComponent {
 
@@ -41,13 +44,17 @@ export class OrganizationList extends PureComponent {
         return (
             <Fragment>
                 <AppBar position="static">
-                    <Toolbar>
+                    <Toolbar className={classes.toolbar}>
                         <IconButton edge="start" color="inherit" aria-label="Menu">
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h5" component="h2">
                             Organizations
                         </Typography>
+
+                        <IconButton onClick={() => this.props.history.goBack()} aria-label="Delete">
+                            <ExitToAppRounded />
+                        </IconButton>
                     </Toolbar>
                 </AppBar>
                 {this.state.isLoading ? <LinearProgress color="secondary" /> : null}
