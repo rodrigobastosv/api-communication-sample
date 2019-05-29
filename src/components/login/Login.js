@@ -46,20 +46,22 @@ export class Login extends Component {
     }
 
     getFormValidity() {
-        return this.state.company !== '' && this.state.username !== '' && this.state.password !== '';
+        return this.state.server !== '' && this.state.username !== '' && this.state.password !== '';
     }
 
     submitFormHandler = () => {
         this.setState({ isLoading: true });
 
-        axios.post('https://beta.greenmile.com' + '/' + LOGIN_ENDPOINT + '?j_username=gmtmproot&j_password=128h1892h89dh1', {}, {
+        const { server, username, password } = this.state;
+
+        axios.post(`${server}/${LOGIN_ENDPOINT}?j_username=${username}&j_password=${password}`, {}, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             }
         }).then(response => {
             let { history } = this.props;
-            history.push('/organization', { username: 'gmtmproot', password: '128h1892h89dh1' });
+            history.push('/organization', { server, username, password });
         }).catch(error => {
             this.setState({ ...this.initialState, loginFailled: true })
         });
@@ -74,8 +76,8 @@ export class Login extends Component {
                     label="Server"
                     margin="normal"
                     variant="outlined"
-                    value={this.state.company}
-                    onChange={this.companyChangeHandler}
+                    value={this.state.server}
+                    onChange={this.serverChangeHandler}
                 />
                 <TextField
                     required
@@ -97,7 +99,7 @@ export class Login extends Component {
                 <div className={classes.loginButtonContainer}>
                     <Button
                         onClick={this.submitFormHandler}
-                        //disabled={!this.state.formValid}
+                        disabled={!this.state.formValid}
                         className={classes.loginButton}
                         variant="contained"
                         color="primary">
