@@ -8,6 +8,7 @@
     "@material-ui/icons": "^4.0.1",
     "axios": "^0.18.0",
     "material-ui": "^1.0.0-beta.47",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-material-ui-form-validator": "^2.0.8",
