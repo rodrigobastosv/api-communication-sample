@@ -9,12 +9,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 
 import classes from './Login.module.css';
-import { HOST, LOGIN_ENDPOINT } from '../../constants';
+import { LOGIN_ENDPOINT } from '../../constants';
 
 export class Login extends Component {
 
     initialState = {
-        company: '',
+        server: '',
         username: '',
         password: '',
         loginFailled: false,
@@ -22,34 +22,47 @@ export class Login extends Component {
         isLoading: false
     };
 
-    state = {...this.initialState};
+    state = { ...this.initialState };
 
-    companyChangeHandler = (event) => this.setState({ company: event.target.value, formValid: this.getFormValidity() });
-    usernameChangeHandler = (event) => this.setState({ username: event.target.value, formValid: this.getFormValidity() });
-    passwordChangeHandler = (event) => this.setState({ password: event.target.value, formValid: this.getFormValidity() });
+    serverChangeHandler = (event) => {
+        this.setState({
+            server: event.target.value,
+            formValid: this.getFormValidity()
+        }); 
+    }
+
+    usernameChangeHandler = (event) => {
+        this.setState({
+            username: event.target.value,
+            formValid: this.getFormValidity() 
+        });
+    }
+
+    passwordChangeHandler = (event) => {
+        this.setState({
+            password: event.target.value,
+            formValid: this.getFormValidity()
+        });
+    }
 
     getFormValidity() {
-        return this.state.company !== '' && this.state.username !== '' && this.state.password !== ''
+        return this.state.company !== '' && this.state.username !== '' && this.state.password !== '';
     }
- 
-    submitFormHandler = () => {
-        //let { history } = this.props;
-        //history.push('/organization', {a: 1});
 
+    submitFormHandler = () => {
         this.setState({ isLoading: true });
-        axios.post(HOST + LOGIN_ENDPOINT, {
-                username: encodeURI('gmtmproot'),
-                password: encodeURI('128h1892h89dh1')
-            }, {
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                    }
-            }).then(function (response) {
-                this.setState({ ...this.initialState })
-            }).catch(error => {
-                this.setState({ ...this.initialState, loginFailled: true })
-            });
+
+        axios.post('https://beta.greenmile.com' + '/' + LOGIN_ENDPOINT + '?j_username=gmtmproot&j_password=128h1892h89dh1', {}, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
+        }).then(response => {
+            let { history } = this.props;
+            history.push('/organization', { username: 'gmtmproot', password: '128h1892h89dh1' });
+        }).catch(error => {
+            this.setState({ ...this.initialState, loginFailled: true })
+        });
     }
 
     render() {
@@ -58,8 +71,7 @@ export class Login extends Component {
                 <div className={classes.logo}></div>
                 <TextField
                     required
-                    id="companyTF"
-                    label="Company"
+                    label="Server"
                     margin="normal"
                     variant="outlined"
                     value={this.state.company}
@@ -67,7 +79,6 @@ export class Login extends Component {
                 />
                 <TextField
                     required
-                    id="usernameTF"
                     label="Username"
                     margin="normal"
                     variant="outlined"
@@ -76,7 +87,6 @@ export class Login extends Component {
                 />
                 <TextField
                     required
-                    id="passwordTF"
                     label="Password"
                     margin="normal"
                     variant="outlined"
@@ -87,12 +97,12 @@ export class Login extends Component {
                 <div className={classes.loginButtonContainer}>
                     <Button
                         onClick={this.submitFormHandler}
-                        disabled={!this.state.formValid}
+                        //disabled={!this.state.formValid}
                         className={classes.loginButton}
                         variant="contained"
                         color="primary">
 
-                        {this.state.isLoading ? <CircularProgress color="secondary" size={22} /> :  <Typography>Login</Typography>}
+                        {this.state.isLoading ? <CircularProgress color="secondary" size={22} /> : <Typography>Login</Typography>}
                     </Button>
                 </div>
 
