@@ -23,8 +23,8 @@ const app = (
     <MuiThemeProvider theme={theme}>
         <BrowserRouter>
             <Switch>
-                <Route path="/" exact={true} component={Login} />
                 <Route path="/organization" component={OrganizationList} />
+                <Route path="/" component={Login} />
             </Switch>
         </BrowserRouter>
     </MuiThemeProvider>
