@@ -1,5 +1,7 @@
 .DS_STORE
 node_modules
+platforms
+plugins
 .history
 scripts/flow/*/.flowconfig
 scripts/rollup/results.json
