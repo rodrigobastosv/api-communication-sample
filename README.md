@@ -8,6 +8,20 @@ Estando todos esses dados corretos, o usuário é direcionado para uma tela que 
 
 São basicamente duas chamadas para a API: a chamada inicial (POST) de autenticação do usuário e a chamada para o endpoint de organização (GET).
 
-Tecnologias Utilizadas:
-- Axios
-- React Material
+# Tecnologias Utilizadas:
+
+* Axios
+* React Material
+
+# Passos para rodar a aplicação:
+
+* App React JS:
+  * Clonar repositório
+  * yarn install
+  * yarn start
+
+* Android APP:
+  * Clonar repositório
+  * cordova platform add android
+  * cordova build android
+  * cordova run android
